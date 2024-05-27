@@ -1,5 +1,8 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PrismaClient } from '@prisma/client';
+
+const config = new ConfigService();
 
 @Injectable()
 export class PrismaService
@@ -10,7 +13,7 @@ export class PrismaService
     super({
       datasources: {
         db: {
-          url: 'postgresql://postgres:123@localhost:5432/nestjs?schema=public',
+          url: config.get('DATABASE_URL'),
         },
       },
     });
