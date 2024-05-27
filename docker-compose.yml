@@ -8,3 +8,15 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: nestjs
+
+  backend:
+    build: .
+    ports:
+      - '3001:3000'
+      - '5555:5555'
+    env_file:
+      - ./.env
+    volumes:
+      - .:/app
+    depends_on:
+      - db
